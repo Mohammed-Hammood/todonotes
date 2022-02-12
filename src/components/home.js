@@ -1,5 +1,5 @@
 import './styling/home.scss';
-import { getActiveToDoId, getToDoList, updateToDoList, getToDo, searchToDoByName } from './localStorage';
+import { getActiveToDoId, getToDoList, updateToDoNote, getToDoNote, searchToDoByName } from './localStorage';
 import { useState } from 'react';
 import { getFullDate, modalToggle, mouseDown } from './DOM';
 import SVG from './SVG';
@@ -8,10 +8,14 @@ export default function Home (){
     const [todolist, setToDoList] = useState(getToDoList());
     const [activeToDoId, setActiveDoDoId] = useState(getActiveToDoId());
     const [searchResult, setSearchResult] = useState([]);
+    //to change the todo note when click on the todo note
+    //чтобы изменить заметку TODO при нажатии на заметку TODO
     const changeToDoList = (activeId)=> {
         localStorage.setItem("active", activeId);
         setActiveDoDoId(activeId);
     }
+    //when user clikcs on save/delete/add/confirm, this functions handles the changes
+    //когда пользователь нажимает /save/add/confirm/search, эта функция обрабатывает изменения
     const handleToDoList = (event)=> {
         event.preventDefault();
         const name = document.getElementById("name-input");
@@ -20,6 +24,8 @@ export default function Home (){
         let processStatus = 'waiting';
         const checkedStatus = document.querySelector("input[name='process-status']:checked").value;
         if(['in-process', 'waiting', 'completed'].includes(checkedStatus)){processStatus = checkedStatus;}
+        //new ToDo object that will be save in localstorage
+        //Объект ToDo note, который будет сохранен в локальном хранилище 
         const newToDo = {
             name: name.value,
             id:getToDoList().length,
@@ -27,6 +33,8 @@ export default function Home (){
             description:description.value.trim(),
             processStatus:processStatus
         };
+        //when user clicks on search button, this will search in the localStorage and show result
+        ////когда пользователь нажимает кнопку поиска, это будет выполнять поиск в локальном хранилище и показывать результат
         if(operation === 'Search'){
            const search = document.getElementById("search-input");
            const resultContainer = document.getElementById("search-result-container");
@@ -38,28 +46,33 @@ export default function Home (){
                setSearchResult(() => result);
            }
         }
+        //when user clicks on confirm DELETION, THIS will handle all the changes
+        //когда пользователь нажимает «Подтвердить УДАЛЕНИЕ», ЭТО будет обрабатывать все изменения
         else if(operation === 'Delete'){
-            updateToDoList({activeToDoId:activeToDoId, operation:operation});
+            updateToDoNote({activeToDoId:activeToDoId, operation:operation});
             modalToggle({operation:operation, activeToDoId:activeToDoId});
             if(activeToDoId >= getToDoList().length){localStorage.setItem("active", getToDoList().length -1)}
             setToDoList(() => getToDoList() );
             setActiveDoDoId(getActiveToDoId);
         }
+        //this when the user adds/edits TODO notes
+        //это когда пользователь добавляет/редактирует заметки TODO
         else if(name.value.trim().length > 0){
-            updateToDoList({newToDo:newToDo, operation:operation, activeToDoId:activeToDoId});
+            updateToDoNote({newToDo:newToDo, operation:operation, activeToDoId:activeToDoId});
             modalToggle({operation:operation, activeToDoId:activeToDoId});
             name.value = "";
             description.value = "";
             setToDoList(() => getToDoList() );
         }
     }
-
     return (<div className="main-content-container">
             <div className='navbar-container'>
                 <div className='left-buttons-container'>
                     <div className='icon-container' title="Add" onClick={()=>modalToggle({operation:"Add", activeToDoId:activeToDoId})}>
                         <SVG class='navbar-buttons' name='plus' color='white' />
                     </div>
+                    {/* If there's no TODO note in the localStorage, then do not show the DELETE/EDIT/SEARCH icons in the navbar*/}
+                    {/* Если в localStorage нет примечания TODO, не отображать значки УДАЛИТЬ/РЕДАКТИРОВАТЬ/ПОИСК на панели навигации. */}
                     {(getToDoList().length > 0 )?<>                  
                         <div className='icon-container' title="Edit" onClick={()=> modalToggle({operation:"Edit", activeToDoId:activeToDoId})}>
                             <SVG class='navbar-buttons' name='edit' color='white' />
@@ -74,30 +87,29 @@ export default function Home (){
                         <SVG name='search' color='white' class="navbar-buttons" />
                     </div>
                 </>:""}
-            </div>
+            </div> 
             <div className='content-container'>
                 <div className='left-container' id='left-container'>
+                    {/*todolist is an array contains all the object "TODO notes" */}
+                    {/*todolist - это массив, содержащий все объекты "заметки TODO" */}
                     { todolist.map((item, key)=> {
                         return <button className={(getActiveToDoId() === key)?`todolist  ${item.processStatus}`:`${item.processStatus}-hover todolist`} id={key} key={key} onClick={()=> changeToDoList(key)}>{item.name}</button>
                     })}
                 </div>
+                {/*the center-container div is the resizer */}
+                {/*the center-container div - это изменение размера */}
                 <div className='center-container' id='center-container' onMouseDown={(event)=> mouseDown(event) } ></div>
                 <div className='right-container' id='right-container'>
-                { todolist.map((item, key)=> {
-                    if(getActiveToDoId() === key){
-                        return <div key={key} >
-                                    <div className={`header-container ${item.processStatus}`} id='header-container'>
-                                        <div>Name: {item.name}</div>
-                                        <div>Process Status: {item.processStatus}</div>
-                                        <div>Date added: {item.date }</div>
-                                    </div>
-                                    <div className='description-container'>{item.description}</div>
-                            </div>
-                    }
-                    return null;
-                    })}
+                    <div className={`header-container ${getToDoNote(getActiveToDoId()).processStatus}`} id='header-container'>
+                        <div>Name: {getToDoNote(getActiveToDoId()).name}</div>
+                        <div>Process Status: {getToDoNote(getActiveToDoId()).processStatus}</div>
+                        <div>Date added: {getToDoNote(getActiveToDoId()).date }</div>
+                    </div>
+                    <div className='description-container'>{getToDoNote(getActiveToDoId()).description}</div>
                 </div>
             </div>
+                {/* this modal "popup window" all in one, DELETE/SEARCH/EDIT/ADD  */}
+                {/* это модальное "всплывающее окно" все в одном, УДАЛИТЬ/ПОИСК/РЕДАКТИРОВАТЬ/ДОБАВИТЬ  */}
             <div className='modal-container hidden' id='modal-container'>
                 <div className='modal-content-container'>
                     <div className='shadow' onClick={()=> modalToggle({activeToDoId:activeToDoId})}></div>
@@ -105,7 +117,6 @@ export default function Home (){
                         <div className='operation-name-container'>
                             <span className='operation-name' id='operation-name'></span>
                         </div>
-
                             <div className='inputs-container' id='inputs-container'>
                                 <label htmlFor='name-input'>Name: 
                                     <input name='name' type='text' placeholder='Name..' id='name-input' required />
@@ -128,7 +139,6 @@ export default function Home (){
                                         <label htmlFor="waiting">Waiting</label> 
                                     </div>
                                 </div>
-                                
                             </div>
                             <div className='search-container' id='search-container'>
                                 <div className='count-container' id='count-container'></div>
@@ -146,7 +156,7 @@ export default function Home (){
                                 </label>
                             </div>
                             <div className='text-container' id='text-container'>
-                                <p>Do you want to delete "{getToDo(activeToDoId).name}"?</p>
+                                <p>Do you want to delete "{getToDoNote(activeToDoId).name}"?</p>
                             </div>
                             <div className='buttons-container'>
                                     <button type='submit' className='save-button' onClick={(event)=> handleToDoList(event)}>
@@ -156,7 +166,6 @@ export default function Home (){
                                         <span>Close</span>
                                     </button>
                             </div>
-                        
                     </div>
                 </div>
             </div>

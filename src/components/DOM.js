@@ -1,6 +1,10 @@
-import { getActiveToDoId, getToDo } from "./localStorage";
+import { getActiveToDoId, getToDoNote } from "./localStorage";
+//a varialbe saves the original width of the window, so when the user changes the window size "not the divs", resetWindow Function will be called
+//переменная сохраняет исходную ширину окна, поэтому, когда пользователь изменяет размер окна "не div", будет вызываться функция сброса окна
 var initialWindowWidth = window.innerWidth;
 
+//function shows the specific content "DELETE/ADD/SEARCH/EDIT" in the popup window or hides. operation variable tells which operation should perform DELETE/ADD/...
+//функция показывает конкретное содержимое "УДАЛИТЬ/ДОБАВИТЬ/ПОИСК/РЕДАКТИРОВАТЬ" во всплывающем окне или скрывает. переменная операции сообщает, какая операция должна выполнять DELETE/ADD/...
 export const modalToggle = ({operation='', activeToDoId=getActiveToDoId()})=> {
     const container = document.getElementById("modal-container");
     if(container.className.includes("hidden")){
@@ -20,8 +24,7 @@ export const modalToggle = ({operation='', activeToDoId=getActiveToDoId()})=> {
             inputsContainer.classList.add("hidden");
             textContainer.classList.add("hidden");
             searchContainer.classList.remove("hidden");
-            document.getElementById("search-input").value = '';
-            
+            document.getElementById("search-input").value = '';            
         }
         else if(operation === 'Edit'){
             submitBtn.innerText = "Save";
@@ -30,7 +33,7 @@ export const modalToggle = ({operation='', activeToDoId=getActiveToDoId()})=> {
             textContainer.classList.add("hidden");
             const name = document.getElementById("name-input");
             const description = document.getElementById("description-textarea");
-            const toDo = getToDo(activeToDoId);
+            const toDo = getToDoNote(activeToDoId);
             name.value = toDo.name;
             description.value = toDo.description;
             for(let i =0; i<processStatusButton.length; i++){
@@ -58,7 +61,8 @@ export const modalToggle = ({operation='', activeToDoId=getActiveToDoId()})=> {
         document.getElementById("description-textarea").value = '';       
     }
 }
-
+//function changes/resizes the width of the left column "div which contains all TODO notes names".
+//функция изменяет/изменяет ширину левого столбца "div, который содержит имена всех заметок TODO".
 export function mouseDown(event){
     window.addEventListener("mousemove", mouseMove);
     window.addEventListener("mouseup", mouseUp);
@@ -72,10 +76,11 @@ export function mouseDown(event){
         const rectCenter = center.getBoundingClientRect();
         const rectLeft = left.getBoundingClientRect();
         const rectRight = right.getBoundingClientRect();
+       
         if(right.clientWidth >= 50){
             center.style.left = rectCenter.left - newX + "px";
-            left.style.width = rectLeft.width - newX + "px";
-           right.style.width= rectRight.width + newX + "px";
+            left.style.width  = rectLeft.width - newX + "px";
+            right.style.width = rectRight.width + newX + "px";
         }
         else {
              window.removeEventListener("mousemove", mouseMove);
@@ -84,17 +89,18 @@ export function mouseDown(event){
              center.style.left = "92%";
         }
         prevX = event.clientX;
+        //a code resets the width of all "3 divs, center, left and right" divs when a deformation in the dimensions happens. 
+        // код сбрасывает ширину всех "3 div, центр, левый и правый" div, когда происходит деформация размеров.
         let leftOfCenterDiv = center.style.left.split(".");
-        if(parseInt(leftOfCenterDiv[0]) < left.clientWidth){resetWindow(true);}
+        if(parseInt(leftOfCenterDiv[0])+3 < left.clientWidth){resetWindow(true);}
     }
-    if(window.getSelection || document.selection){
-        (window.getSelection ? window.getSelection() : document.selection).empty()
-    }
-    function mouseUp(event){
+    function mouseUp(){
         window.removeEventListener("mousemove", mouseMove);    
     }
 }
 window.addEventListener("resize", resetWindow);
+//functions reset the size of all the divs when called
+//функции сбрасывают размер всех div при вызове
 function resetWindow (reset=false){
     if(initialWindowWidth !== window.innerWidth || reset){
         const left = document.getElementById("left-container");
@@ -106,7 +112,8 @@ function resetWindow (reset=false){
          center.style.left = "30%";
      }
 }
-
+//function creates date object by specific formats.
+//функция создает объект даты по заданным форматам.
 export const getFullDate = ()=> {
     const date = new Date();
     const year=  date.getFullYear();

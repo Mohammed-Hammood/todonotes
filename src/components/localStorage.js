@@ -1,9 +1,15 @@
+//localStorage.js contains all functions that do operation on localStorage and their names tell what they do.
+//localStorage.js содержит все функции, которые выполняют операции с localStorage, и их имена говорят о том, что они делают.
+
+//function returns/creates an array contains TODO notes in the local storage
+//функция возвращает/создает массив, содержащий записи TODO в локальном хранилище
 export const getToDoList = ()=> {
     const data = JSON.parse(localStorage.getItem("data")) || localStorage.setItem("data", JSON.stringify([])) || [];
     return data;
 }
-
-export const updateToDoList = ({operation=null, newToDo=null, acitveToDoId=getActiveToDoId()}) => {
+//functions update (Add/DELETE/EDIT) object of TODO notes in the local storage. operation variable tells which operation shoud perform.
+//функции обновляют (добавляют/удаляют/редактируют) объект TODO-заметок в локальном хранилище. переменная операции сообщает, какую операцию следует выполнить.
+export const updateToDoNote = ({operation=null, newToDo=null, acitveToDoId=getActiveToDoId()}) => {
     const data = getToDoList();
     if(operation === 'Add'){
         data.push(newToDo);
@@ -29,11 +35,9 @@ export const updateToDoList = ({operation=null, newToDo=null, acitveToDoId=getAc
     }
     updateToDoListIds();
 }
-export const updateActiveToDo = (newTodoList) => {
-    const data = getToDoList();
-    data.push(newTodoList);
-    localStorage.setItem("data", JSON.stringify(data));
-}
+
+//function updates TODO NOTE ids, when deletion hapens, some Ids will be missing and this will cause problems, so this function shifts the Ids of objects.
+////функция обновляет идентификаторы TODO ПРИМЕЧАНИЕ. Когда происходит удаление, некоторые идентификаторы будут отсутствовать, и это вызовет проблемы, поэтому эта функция сдвигает идентификаторы объектов.
 export const updateToDoListIds = ()=> {
     const data = getToDoList();
     let index = 0;
@@ -43,19 +47,25 @@ export const updateToDoListIds = ()=> {
     }
     localStorage.setItem("data", JSON.stringify(data));
 }
+//functions returns/creates the id of the active TODO note (currently opened TODO note) in the local storage , 
+//функции возвращают/создают id активной заметки TODO (открытой в данный момент заметки TODO) в локальном хранилище,
 export const getActiveToDoId = () => {
   const active = parseInt(localStorage.getItem('active')) || localStorage.setItem("active", 0) || 0;
   if(active >= 0){return active;}
   localStorage.setItem("active", 0);
   return 0;
 }
-export const getToDo = (toDoId) => {
+//functions returns specific TODO note by Id from local storage.
+//функция возвращает конкретную заметку TODO по идентификатору из локального хранилища.
+export const getToDoNote = (toDoNoteId) => {
     const data = getToDoList()
     for(let i =0; i < data.length; i++){
-        if(data[i].id === toDoId)return data[i];
+        if(data[i].id === toDoNoteId)return data[i];
     }
     return {};
 }
+//function search for TODO notes by the name and returns an array contains all TODO NOTE objects who contain a specific string.
+//функция ищет заметки TODO по названию и возвращает массив, содержащий все объекты ЗАМЕТКИ ЗАДАНИЯ, которые содержат определенную строку. 
 export const searchToDoByName = (toDoName)=> {
     const data = getToDoList();
     let result = [];

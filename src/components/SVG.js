@@ -12,5 +12,4 @@ export default function SVG(props){
     if(props.name === 'edit' || props.name === 'Edit')return Edit;
     if(props.name === 'trash' || props.name === 'Trash')return Trash;
     return null;
-
 }

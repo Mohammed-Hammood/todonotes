@@ -58,6 +58,9 @@ body {
                 overflow:hidden;
                 text-overflow:ellipsis;
                 white-space:nowrap;
+                background-color: #fff;
+                border: 1px solid #eee;
+                text-align: left;
             } 
             .waiting,  .waiting-hover:hover { 
                 background-color:#c3c3c3;
