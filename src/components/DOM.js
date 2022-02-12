@@ -10,6 +10,7 @@ export const modalToggle = ({operation='', activeToDoId=getActiveToDoId()})=> {
         const inputsContainer = document.getElementById("inputs-container");
         const textContainer = document.getElementById("text-container");
         const searchContainer = document.getElementById("search-container");
+        const processStatusButton = document.querySelectorAll("input[name='process-status']");
         operationName.innerText = operation;
         operationName.classList = operation;
         if(operation === 'Search'){
@@ -20,6 +21,7 @@ export const modalToggle = ({operation='', activeToDoId=getActiveToDoId()})=> {
             textContainer.classList.add("hidden");
             searchContainer.classList.remove("hidden");
             document.getElementById("search-input").value = '';
+            
         }
         else if(operation === 'Edit'){
             submitBtn.innerText = "Save";
@@ -31,6 +33,13 @@ export const modalToggle = ({operation='', activeToDoId=getActiveToDoId()})=> {
             const toDo = getToDo(activeToDoId);
             name.value = toDo.name;
             description.value = toDo.description;
+            for(let i =0; i<processStatusButton.length; i++){
+                if(processStatusButton[i].value === toDo.processStatus){
+                    processStatusButton[i].checked = true;
+                }else {
+                    processStatusButton[i].checked = false;
+                }
+            }
         }else if(operation === 'Delete'){
             submitBtn.innerText = "Confirm";
             searchContainer.classList.add("hidden");
@@ -96,4 +105,16 @@ function resetWindow (reset=false){
          left.style.width =  "30%";
          center.style.left = "30%";
      }
+}
+
+export const getFullDate = ()=> {
+    const date = new Date();
+    const year=  date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const display = (number)=> {return ((number < 10)?'0'+number:number);}
+    const fullDate = year + '/' + display(month) + '/' + display(day) + ', '+ display(hours) + ':' + display(minutes);
+    return fullDate; 
 }

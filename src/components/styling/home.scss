@@ -13,9 +13,19 @@ body {
         width:100%;
         background-color: #373737;
         position:fixed;
-        .add-button {
+        justify-content: space-between;
+        display: flex;
+        .icon-container {
             height: 100%;
-            padding: 15px;
+            padding: 0px;
+            display: inline-block;
+            width: 50px;
+            cursor: pointer;
+        }
+       
+        .navbar-buttons {
+            height: 100%;
+            padding: 17px;
             cursor: pointer;
             border: none;
         }
@@ -45,12 +55,20 @@ body {
                 cursor:pointer;
                 display:block;
                 border:none;
-                overflow-x:hidden;
+                overflow:hidden;
+                text-overflow:ellipsis;
+                white-space:nowrap;
+            } 
+            .waiting,  .waiting-hover:hover { 
+                background-color:#c3c3c3;
             }
-            .todolist:hover, .active {
-                background-color:black;
-                color:white;
+            .in-process, .in-process-hover:hover {
+                background-color: #87c1ff;
             }
+            .completed, .completed-hover:hover  {
+                background-color:#20be20;
+            }
+        
         }
         .center-container {
             width: 5px;
@@ -62,20 +80,40 @@ body {
             z-index:10;
         }
         .right-container {
-            // width:calc(70% - 5px);
             top:50px;
             width:calc(70% - 6px);
             display: block;
             right:0;
             border:none;
             height:calc(100% - 50px);
-            padding:15px;
             word-wrap: break-word;
             position: fixed;
             overflow-y:auto;
             overflow-x:hidden;
             bottom:0;
             z-index:1;
+            .header-container {
+                width: 100%;
+                height: auto;
+                background-color: silver;
+                padding: 14px;
+                font-size: 12px;
+                cursor: default;
+            }
+            .waiting {
+                background-color:#c3c3c3;
+            }
+            .in-process {
+                background-color: #87c1ff;
+            }
+            .completed {
+                background-color:#20be20;
+            }
+            .description-container {
+                width: 100%;
+                height:auto;
+                padding:15px;
+            }
         }
     }
     .modal-container {
@@ -165,6 +203,16 @@ body {
                 }
                 .inputs-container {
                     padding:15px;
+                    .process-status-container {
+                        input {
+                            border: none;
+                            border-radius: none;
+                            width: 15px;
+                            padding: 0;
+                            height: 15px;
+                        }
+                        font-size: 14px;
+                    }
                     input {
                         height: 40px;
                         border-radius: 5px;
@@ -207,3 +255,5 @@ body {
 .flex {
     display: flex;
 }
+
+
