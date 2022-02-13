@@ -22,17 +22,7 @@ export default function Home (){
         const description = document.getElementById("description-textarea");
         const operation = document.getElementById("operation-name").innerText;
         let processStatus = 'waiting';
-        const checkedStatus = document.querySelector("input[name='process-status']:checked").value;
-        if(['in-process', 'waiting', 'completed'].includes(checkedStatus)){processStatus = checkedStatus;}
-        //new ToDo object that will be save in localstorage
-        //Объект ToDo note, который будет сохранен в локальном хранилище 
-        const newToDo = {
-            name: name.value,
-            id:getToDoList().length,
-            date: getFullDate(),
-            description:description.value.trim(),
-            processStatus:processStatus
-        };
+       
         //when user clicks on search button, this will search in the localStorage and show result
         ////когда пользователь нажимает кнопку поиска, это будет выполнять поиск в локальном хранилище и показывать результат
         if(operation === 'Search'){
@@ -58,6 +48,17 @@ export default function Home (){
         //this when the user adds/edits TODO notes
         //это когда пользователь добавляет/редактирует заметки TODO
         else if(name.value.trim().length > 0){
+            const checkedStatus = document.querySelector("input[name='process-status']:checked").value;
+            if(['in-process', 'waiting', 'completed'].includes(checkedStatus)){processStatus = checkedStatus;}
+            //new ToDo object that will be save in localstorage
+            //Объект ToDo note, который будет сохранен в локальном хранилище 
+            const newToDo = {
+                name: name.value,
+                id:getToDoList().length,
+                date: getFullDate(),
+                description:description.value.trim(),
+                processStatus:processStatus
+            };
             updateToDoNote({newToDo:newToDo, operation:operation, activeToDoId:activeToDoId});
             modalToggle({operation:operation, activeToDoId:activeToDoId});
             name.value = "";
@@ -145,6 +146,7 @@ export default function Home (){
                                 <div className='search-result-container' id='search-result-container'>
                                     {searchResult.map((item, key)=> {
                                         return <div className='todos' key={key} id={item.id} onClick={()=>{
+                                            document.getElementById(item.id).scrollIntoView();
                                             localStorage.setItem('active', item.id);
                                             modalToggle({activeToDoId:item.id});
                                             setActiveDoDoId(parseInt(item.id));

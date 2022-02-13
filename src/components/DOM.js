@@ -54,6 +54,7 @@ export const modalToggle = ({operation='', activeToDoId=getActiveToDoId()})=> {
             searchContainer.classList.add("hidden");
             textContainer.classList.add("hidden");
             inputsContainer.classList.remove("hidden");
+            document.querySelectorAll("input[name='process-status']")[2].checked = true;
         }
     }else{
         container.classList.add("hidden");
