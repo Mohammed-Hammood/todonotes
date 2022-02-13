@@ -1,7 +1,7 @@
 # To install dependancies use 'npm ci'
 
-
-#info about TODO notes app:
+.... 
+# info about TODO notes app:
 - TODO app create by npx create-react-app.
 - The app creates/adds, edits, deletes todo notes. 
 - You can search for TODO notes by the name.
