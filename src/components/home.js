@@ -1,4 +1,4 @@
-import './styling/home.scss';
+import '../styling/home.scss';
 import { getActiveToDoId, getToDoList, updateToDoNote, getToDoNote, searchToDoByName } from './localStorage';
 import { useState } from 'react';
 import { getFullDate, modalToggle, mouseDown } from './DOM';

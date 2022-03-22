@@ -1,5 +1,4 @@
 import Home from "./components/home.js";
-
 function App() {
   return (
     <div className="App">
@@ -7,5 +6,4 @@ function App() {
     </div>
   );
 }
-
 export default App;

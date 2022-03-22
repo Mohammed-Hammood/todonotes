@@ -1,10 +1,19 @@
+import { fakeToDoNotes } from "./fake-initial-todos";
 //localStorage.js contains all functions that do operation on localStorage and their names tell what they do.
 //localStorage.js содержит все функции, которые выполняют операции с localStorage, и их имена говорят о том, что они делают.
 
 //function returns/creates an array contains TODO notes in the local storage
 //функция возвращает/создает массив, содержащий записи TODO в локальном хранилище
+
 export const getToDoList = ()=> {
-    const data = JSON.parse(localStorage.getItem("data")) || localStorage.setItem("data", JSON.stringify([])) || [];
+    let data = []; 
+    if(localStorage.getItem('data') === null){
+        //fake todo notes.
+        data = fakeToDoNotes;
+        localStorage.setItem("data", JSON.stringify(fakeToDoNotes));
+    }else {
+         data = JSON.parse(localStorage.getItem("data"));
+    }
     return data;
 }
 //functions update (Add/DELETE/EDIT) object of TODO notes in the local storage. operation variable tells which operation shoud perform.
