@@ -1,5 +1,8 @@
 # To install dependancies use 'npm ci'
 
+The app was deployed on heroku:
+https://todo-notes-1.herokuapp.com
+
 .... 
 # Info about TODO notes app:
 - TODO app created by npx create-react-app.
