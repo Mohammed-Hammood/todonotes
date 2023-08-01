@@ -1,7 +1,7 @@
 # To install dependancies use 'npm ci'
 
-The app was deployed on heroku:
-https://todo-notes-1.herokuapp.com
+The app was deployed on:
+[https://todonotes-2.vercel.app/](https://todonotes-2.vercel.app/)
 
 .... 
 # Info about TODO notes app:
