@@ -1,17 +1,17 @@
+import { Button } from "components";
 import { TodoContext } from "context";
 import { useContext } from "react";
 import { LocalStorage } from "utils";
 
 type Props = {
-    todo: TodoNote
     close: ()=> void;
 }
 
-const ToDoDeleteForm = ({ close, todo}: Props) => {
-    const { todos, setTodos } = useContext(TodoContext);
+const ToDoDeleteForm = ({ close}: Props) => {
+    const { todos, setTodos, activeTodo  } = useContext(TodoContext);
     
     const deleteTodo = () => {
-        const newTodos = todos.filter(item => item.id !== todo.id);
+        const newTodos = todos.filter(item => activeTodo && item.id !== activeTodo.id);
         
         setTodos(newTodos);
         
@@ -23,16 +23,17 @@ const ToDoDeleteForm = ({ close, todo}: Props) => {
     return (
         <>
             <div className='text-container' >
-                <p>Do you want to delete "{todo.name}"?</p>
+                <p>Do you want to delete "{activeTodo?.name}"?</p>
             </div>
             <div className='buttons'>
-                <button
-                    type='button'
-                    className='danger'
+                <Button
+                    shape={"filled"}                    
                     onClick={deleteTodo}
+                    bg={"danger"}
+                    radius
                 >
                     Delete
-                </button>
+                </Button>
 
             </div>
         </>

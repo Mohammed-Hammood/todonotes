@@ -109,23 +109,11 @@
                 }
             }
             .buttons {
+                height: 45px;
                 width: 100%;
                 display: flex;
                 justify-content: flex-start;
-                padding-bottom:10px;
-                button {
-                    padding:15px;
-                    border-radius:5px;
-                    color:black;
-                    &.danger {
-                        background-color: var(--base-red, rgb(251, 11, 11));
-                        color:var(--base-white, #ffff);
-                    }
-                    &.primary {
-                        background-color: var(--base-blue, blue);
-                        color:var(--base-white, #ffff);
-                    }
-                }
+                margin:10px 0;
             }
         }
     }

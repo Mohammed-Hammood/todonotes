@@ -26,7 +26,7 @@ export const Modal = (props: Props): JSX.Element | null => {
                         </button>
                     </div>
                     <div className='body'>
-                        {Forms({ form, props })}
+                        {Forms({ form, ...{ props, close } })}
                     </div>
                 </div>
             </Portal>

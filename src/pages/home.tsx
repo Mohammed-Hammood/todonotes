@@ -17,6 +17,7 @@ export default function HomePage() {
                     return <button
                         className={(activeTodo && activeTodo.id === item.id) ? `todolist  ${item.status}` : `${item.status}-hover todolist`}
                         key={item.id}
+                        id={`todo_${item.id}`}
                         onClick={() => setActiveTodo(item)}
                     >
                         {item.name}

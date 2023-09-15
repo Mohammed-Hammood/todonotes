@@ -1,0 +1,44 @@
+.button {
+    border:0;
+    outline:0;
+    padding: 2px 10px;
+    color: var(--base-black, #0000);
+    cursor: pointer;
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:hover {
+        transform: scale(1.05);
+    }
+}
+
+.filled {
+    background: var(--main-color);
+    color:white;
+}
+
+.outline {
+    background: transparent;
+    outline: 1px solid var(--main-color);
+    color:black;
+}
+
+.transparent {
+    background:transparent;
+    color:var(--base-black, #0000);
+}
+
+.radius {
+    border-radius:5px;
+}
+
+
+.danger {
+    background-color: var(--base-red, rgb(251, 11, 11));
+    color:var(--base-white, #ffff);
+}
+.primary {
+    background-color: var(--base-blue, blue);
+    color:var(--base-white, #ffff);
+}

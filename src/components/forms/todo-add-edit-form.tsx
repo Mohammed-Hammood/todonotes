@@ -15,6 +15,7 @@ const AddEditForm = ({ todo, close }: Props) => {
 
     const submitHandler = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
+        
         const newTodo: TodoNote = {
             id: todo?.id || new Date().getTime(),
             date: todo?.date || new Date().toUTCString(),

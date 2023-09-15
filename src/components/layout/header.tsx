@@ -1,5 +1,4 @@
-import { Modal } from "components";
-import { ICON } from "components";
+import { Modal, ICON, Button } from "components";
 import { TodoContext } from "context";
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
@@ -20,34 +19,34 @@ export const Header = () => {
                         <Link to={"/"}>
                             Home
                         </Link>
-                        <div className='icon-container' title="Add" onClick={() => setAddModal(true)}>
-                            <ICON class='navbar-buttons' name='plus-solid' color='white' />
-                        </div>
+                        <Button shape={"outline"} title="Add" onClick={() => setAddModal(true)}>
+                            <ICON name='plus-solid' color='white' />
+                        </Button>
                         {activeTodo && <>
-                            <div className='icon-container' title="Edit" onClick={() => setEditTodo(activeTodo)}>
-                                <ICON
-                                    class='navbar-buttons'
-                                    name='pen-to-square-solid'
-                                    color='white'
-                                />
-                            </div>
-                            <div className='icon-container' title="Delete" onClick={() => setDeleteTodo(activeTodo)}>
-                                <ICON
-                                    class='navbar-buttons'
-                                    name={'trash-solid'}
-                                    color='white'
-                                />
-                            </div>
+                            <Button
+                                shape={"transparent"}
+                                title="Edit"
+                                onClick={() => setEditTodo(activeTodo)}
+                            >
+                                <ICON name='pen-to-square-solid' color='white' />
+                            </Button>
+                            <Button
+                                title="Delete"
+                                shape={"transparent"}
+                                onClick={() => setDeleteTodo(activeTodo)}
+                            >
+                                <ICON name={'trash-solid'} color='white' />
+                            </Button>
                         </>}
                     </div>
                     {todos.length > 0 && <>
-                        <button
-                            className='icon-container'
+                        <Button
+                            shape={"transparent"}
                             title="Search"
                             onClick={() => setSearchModal(true)}
                         >
-                            <ICON name='search' color='white' class="navbar-buttons" />
-                        </button>
+                            <ICON name='search' color='white' />
+                        </Button>
                     </>}
                 </nav>
             </header>
@@ -68,6 +67,7 @@ export const Header = () => {
                 close={() => setEditTodo(null)}
                 form='add-edit'
                 title={<span>Edit todo</span>}
+                {...{ todo: activeTodo }}
             />
 
             <Modal

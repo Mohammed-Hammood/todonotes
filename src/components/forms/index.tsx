@@ -9,7 +9,7 @@ type Props = {
 const Forms = (props: Props) => {
 
     const _forms: Record<FormsNames, JSX.Element> = {
-        "search": <SearchForm {...props} />,
+        "search": <SearchForm {...props.props} />,
         "add-edit": <AddEditForm {...props.props} />,
         "delete": <DeleteForm {...props.props} />,
     }

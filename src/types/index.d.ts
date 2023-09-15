@@ -5,6 +5,9 @@ type Status =  "waiting" | "completed" | "in-process";
 
 type FormsNames = "search" |"add-edit" |"delete";
 
+type ButtonShapes = "transparent" | "outline" | "filled";
+
+
 type TodoNote  = {
     id:number;
     name:string;
