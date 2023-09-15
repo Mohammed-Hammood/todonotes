@@ -1,4 +1,4 @@
-export const fakeToDoNotes: TodoNote[] = [
+export const InitialDoNotes: TodoNote[] = [
     {
         name: 'English',
         id: 2,

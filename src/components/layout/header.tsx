@@ -5,11 +5,12 @@ import { Link } from "react-router-dom";
 
 
 export const Header = () => {
-    const { todos, activeTodo } = useContext(TodoContext);
+    const { todos, activeTodo, order, setOrder } = useContext(TodoContext);
     const [deleteTodo, setDeleteTodo] = useState<null | TodoNote>(null);
     const [editTodo, setEditTodo] = useState<null | TodoNote>(null);
     const [searchModal, setSearchModal] = useState<boolean>(false);
     const [addModal, setAddModal] = useState<boolean>(false);
+   
 
     return (
         <>
@@ -21,6 +22,9 @@ export const Header = () => {
                         </Link>
                         <Button shape={"outline"} title="Add" onClick={() => setAddModal(true)}>
                             <ICON name='plus-solid' color='white' />
+                        </Button>
+                        <Button shape={"outline"} title="Order" onClick={() => setOrder(order === 'id' ? "-id" : "id")}>
+                            <ICON name={order === 'id' ? "sort-up-solid": "sort-down-solid"} color='white' />
                         </Button>
                         {activeTodo && <>
                             <Button
