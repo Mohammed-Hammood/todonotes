@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
-export default function Portal({ children }: { children: React.ReactNode }): JSX.Element | null {
+export function Portal({ children }: { children: React.ReactNode }): JSX.Element | null {
     const [container, setContainer] = useState<null | HTMLDivElement>(null);
 
     useEffect(() => {

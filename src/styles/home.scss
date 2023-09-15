@@ -36,16 +36,15 @@
                 border: 1px solid #eee;
                 text-align: left;
             } 
-            .waiting,  .waiting-hover:hover { 
+            .Waiting,  .Waiting-hover:hover { 
                 background-color:#c3c3c3;
             }
-            .in-process, .in-process-hover:hover {
+            .In-process, .In-process-hover:hover {
                 background-color: #87c1ff;
             }
-            .completed, .completed-hover:hover  {
+            .Completed, .Completed-hover:hover  {
                 background-color:#20be20;
             }
-        
         }
         .center-container {
             width: 5px;

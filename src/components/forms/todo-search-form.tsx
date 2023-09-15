@@ -11,10 +11,11 @@ const SearchForm = ({ close }: Props) => {
     const [result, setResult] = useState<TodoNote[]>([]);
     const { todos, setActiveTodo } = useContext(TodoContext);
 
-    const includes = (text: string): boolean => text.toLowerCase().includes(query.toLowerCase());
 
     const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        const includes = (text: string): boolean => text.toLowerCase().includes(query.toLowerCase());
 
         const result = todos.filter(item => includes(item.name) || includes(item.description));
 
@@ -30,23 +31,26 @@ const SearchForm = ({ close }: Props) => {
     return (
         <form onSubmit={submitHandler}>
             <div className='search-container' id='search-container'>
-                <div className='count-container' id='count-container'>{result.length}</div>
+                <div className='count-container'>{result.length} of {todos.length}</div>
                 <input
                     type={"text"}
                     value={query}
-                    placeholder='Search ToDo by the name'
-                    onInput={(e) => setQuery(((e.target as HTMLInputElement).value))}
+                    placeholder='Search the name'
+                    onInput={ e => setQuery(((e.target as HTMLInputElement).value))}
                 />
-                <div className='search-result-container' id='search-result-container'>
-                    {result.map((item) => {
-                        return <button
-                            className='todos'
-                            key={item.id}
-                            onClick={() => openTodo(item)}>
-                            {item.name}
-                        </button>
-                    })}
-                </div>
+                {result.length > 0 &&
+                    <div className='search-result-container'>
+                        {result.map((item) => {
+                            return <button
+                                className='todos'
+                                key={item.id}
+                                onClick={() => openTodo(item)}
+                            >
+                                {item.name}
+                            </button>
+                        })}
+                    </div>
+                }
             </div>
             <div className='buttons'>
                 <Button type='submit' shape={"filled"} bg={"primary"} radius>

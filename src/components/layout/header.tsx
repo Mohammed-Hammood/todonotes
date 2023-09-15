@@ -4,13 +4,13 @@ import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 
 
-export const Header = () => {
+export const Header = ():JSX.Element => {
     const { todos, activeTodo, order, setOrder } = useContext(TodoContext);
     const [deleteTodo, setDeleteTodo] = useState<null | TodoNote>(null);
     const [editTodo, setEditTodo] = useState<null | TodoNote>(null);
     const [searchModal, setSearchModal] = useState<boolean>(false);
     const [addModal, setAddModal] = useState<boolean>(false);
-   
+
 
     return (
         <>
@@ -18,13 +18,13 @@ export const Header = () => {
                 <nav className='navbar-container'>
                     <div className='left-buttons-container'>
                         <Link to={"/"}>
-                            Home
+                            <ICON name='house-solid' color='white' />
                         </Link>
-                        <Button shape={"outline"} title="Add" onClick={() => setAddModal(true)}>
+                        <Button shape={"transparent"} title="Add" onClick={() => setAddModal(true)}>
                             <ICON name='plus-solid' color='white' />
                         </Button>
-                        <Button shape={"outline"} title="Order" onClick={() => setOrder(order === 'id' ? "-id" : "id")}>
-                            <ICON name={order === 'id' ? "sort-up-solid": "sort-down-solid"} color='white' />
+                        <Button shape={"transparent"} title="Order" onClick={() => setOrder(order === 'id' ? "-id" : "id")}>
+                            <ICON name={order === 'id' ? "sort-up-solid" : "sort-down-solid"} color='white' />
                         </Button>
                         {activeTodo && <>
                             <Button
@@ -58,19 +58,19 @@ export const Header = () => {
                 isOpen={searchModal}
                 close={() => setSearchModal(false)}
                 form='search'
-                title={<span>Search</span>}
+                title={"Search"}
             />}
             <Modal
                 isOpen={addModal}
                 close={() => setAddModal(false)}
                 form='add-edit'
-                title={<span>Add new todo</span>}
+                title={"Add new todo"}
             />
             <Modal
                 isOpen={editTodo !== null}
                 close={() => setEditTodo(null)}
                 form='add-edit'
-                title={<span>Edit todo</span>}
+                title={"Edit todo"}
                 {...{ todo: activeTodo }}
             />
 

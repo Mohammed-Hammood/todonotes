@@ -1,3 +1,4 @@
+import { Button } from "components/button";
 import { TodoContext } from "context";
 import { useContext, useState } from "react"
 import { LocalStorage } from "utils";
@@ -8,14 +9,15 @@ type Props = {
 }
 
 const AddEditForm = ({ todo, close }: Props) => {
-    const {todos, setTodos } = useContext(TodoContext);
+    const { todos, setTodos } = useContext(TodoContext);
     const [name, setName] = useState<string>(todo?.name || '');
-    const [status, setStatus] = useState<Status>(todo?.status || 'waiting');
+    const [status, setStatus] = useState<Status>(todo?.status || 'Waiting');
     const [description, setDescription] = useState<string>(todo?.description || '');
+    const statusButtons:Status[] = ['Completed', 'In process', 'Waiting'];
 
     const submitHandler = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
-        
+
         const newTodo: TodoNote = {
             id: todo?.id || new Date().getTime(),
             date: todo?.date || new Date().toUTCString(),
@@ -31,7 +33,7 @@ const AddEditForm = ({ todo, close }: Props) => {
         setTodos(newTodos);
 
         new LocalStorage().set(newTodos);
-        
+
         close();
     }
     return (
@@ -59,29 +61,33 @@ const AddEditForm = ({ todo, close }: Props) => {
                     ></textarea>
                 </label>
                 <div className='process-status-container'>
-                    <div>Process Status:</div>
-                    <div>
-                        <input
-                            type="radio" id="completed" name="process-status" value="completed"></input>
-                        <label htmlFor="completed">Completed</label>
+                    <div>Status:</div>
+                    <div className="buttons">
+                        {statusButtons.map(item => {
+                            return (
+                                <Button
+                                    width={"fill"}
+                                    type="button"
+                                    key={item}
+                                    shape={item === status ? "filled" : "outline"}
+                                    onClick={()=> setStatus(item)}
+                                >
+                                    {item}
+                                </Button>
+                            )
+                        })}
                     </div>
-                    <div>
-                        <input type="radio" id="in-process" name="process-status" value="in-process"></input>
-                        <label htmlFor="in-process">In process</label>
-                    </div>
-                    <div>
-                        <input type="radio" id="waiting" name="process-status" value="waiting"></input>
-                        <label htmlFor="waiting">Waiting</label>
-                    </div>
+
                 </div>
             </div>
             <div className='buttons'>
-                <button
+                <Button
                     type='submit'
-                    className='primary'
+                    bg='primary'
+                    radius
                 >
                     Save
-                </button>
+                </Button>
             </div>
         </form>
     )

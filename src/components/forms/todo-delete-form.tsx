@@ -27,7 +27,7 @@ const ToDoDeleteForm = ({ close}: Props) => {
             </div>
             <div className='buttons'>
                 <Button
-                    shape={"filled"}                    
+                    shape={"transparent"}                    
                     onClick={deleteTodo}
                     bg={"danger"}
                     radius

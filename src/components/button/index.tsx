@@ -10,16 +10,19 @@ interface Props {
     title?: string;
     radius?:boolean;
     bg?:"primary" | "danger";
-    type?: "submit" | "button"
+    type?: "submit" | "button";
+    width?: "fit-content" | "fill";
+    className?:string;
 }
 
-export const Button: React.FC<Props> = ({ children, bg, shape,radius,  onClick, ...rest }): JSX.Element => {
+export const Button: React.FC<Props> = ({ children,className, bg, width, shape,radius,  onClick, ...rest }): JSX.Element => {
 
     return (
         <button
             onClick={onClick}
             className={clsx(
                 cls.button,
+                className,
                 {
                     [cls.filled]: shape === 'filled',
                     [cls.outline]: shape === 'outline',
@@ -27,6 +30,7 @@ export const Button: React.FC<Props> = ({ children, bg, shape,radius,  onClick, 
                     [cls.danger]: bg === 'danger',
                     [cls.primary]: bg === 'primary',
                     [cls.radius]: radius,
+                    [cls.fullWidth]: width === 'fill',
                 })}
             {...rest}
         >

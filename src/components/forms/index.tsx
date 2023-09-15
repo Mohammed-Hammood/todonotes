@@ -6,7 +6,7 @@ type Props = {
     form: FormsNames;
     props: any;
 }
-const Forms = (props: Props) => {
+export const Forms = (props: Props) => {
 
     const _forms: Record<FormsNames, JSX.Element> = {
         "search": <SearchForm {...props.props} />,
@@ -16,5 +16,3 @@ const Forms = (props: Props) => {
 
     return _forms[props.form];
 }
-
-export default Forms;

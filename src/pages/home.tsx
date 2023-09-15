@@ -15,7 +15,7 @@ export default function HomePage() {
 
                 {todos.map((item) => {
                     return <button
-                        className={(activeTodo && activeTodo.id === item.id) ? `todolist  ${item.status}` : `${item.status}-hover todolist`}
+                        className={(activeTodo && activeTodo.id === item.id) ? `todolist  ${item.status.replace(" ", "-")}` : `${item.status.replace(" ", "-")}-hover todolist`}
                         key={item.id}
                         id={`todo_${item.id}`}
                         onClick={() => setActiveTodo(item)}

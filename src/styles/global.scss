@@ -9,6 +9,8 @@
     font-family: inherit;
     padding:0;
     margin:0;
+    color:inherit;
+    transition: all 0.2s linear;
 }
 
 main {
@@ -19,14 +21,7 @@ main {
 html, body {
     min-height: 100vmin;
 }
-button,
-a {
-    cursor: pointer;
-}
-
-button:active {
-    transform: scale(1.02);
-}
+ 
 
 .icon {
     width: 1rem;

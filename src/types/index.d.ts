@@ -1,7 +1,7 @@
-type IconsNames = "sort-down-solid" | "sort-up-solid" | "xmark-solid" | "search" | "plus-solid" | "pen-to-square-solid" | "trash-solid" | "magnifying-glass-solid";
+type IconsNames = "house-solid" | "sort-down-solid" | "sort-up-solid" | "xmark-solid" | "search" | "plus-solid" | "pen-to-square-solid" | "trash-solid" | "magnifying-glass-solid";
 
 
-type Status = "waiting" | "completed" | "in-process";
+type Status = "Waiting" | "Completed" | "In process";
 
 type FormsNames = "search" | "add-edit" | "delete";
 
