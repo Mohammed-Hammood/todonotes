@@ -1,0 +1,97 @@
+
+
+.main-content-container {
+    display:flex;
+    justify-content: center;
+    
+    .content-container{     
+        display: flex;   
+        justify-content: space-between;
+        flex-direction: column;
+        width:100%;
+        flex-wrap:wrap;
+        margin-top:50px;
+        height: calc(100% - 50px);
+        position:fixed;
+        bottom:0;
+        .left-container {
+            width:30%; 
+            top:50px;
+            flex:1 1 29%;
+            border:none;
+            height: 100%; //calc(100% - 50px);
+            overflow-y:auto;
+            overflow-x:hidden;
+            .todolist{
+                width:100%;
+                height:auto;
+                padding:10px;
+                cursor:pointer;
+                display:block;
+                border:none;
+                overflow:hidden;
+                text-overflow:ellipsis;
+                white-space:nowrap;
+                background-color: #fff;
+                border: 1px solid #eee;
+                text-align: left;
+            } 
+            .waiting,  .waiting-hover:hover { 
+                background-color:#c3c3c3;
+            }
+            .in-process, .in-process-hover:hover {
+                background-color: #87c1ff;
+            }
+            .completed, .completed-hover:hover  {
+                background-color:#20be20;
+            }
+        
+        }
+        .center-container {
+            width: 5px;
+            height: calc(100% - 50px);
+            cursor: col-resize;
+            background: #aaa;
+            position:fixed;
+            left:30%;
+            z-index:10;
+        }
+        .right-container {
+            top:50px;
+            width:calc(70% - 6px);
+            display: block;
+            right:0;
+            border:none;
+            height:calc(100% - 50px);
+            word-wrap: break-word;
+            position: fixed;
+            overflow-y:auto;
+            overflow-x:hidden;
+            bottom:0;
+            z-index:1;
+            .header-container {
+                width: 100%;
+                height: auto;
+                background-color: silver;
+                padding: 14px;
+                font-size: 12px;
+                cursor: default;
+            }
+            .waiting {
+                background-color:#c3c3c3;
+            }
+            .in-process {
+                background-color: #87c1ff;
+            }
+            .completed {
+                background-color:#20be20;
+            }
+            .description-container {
+                width: 100%;
+                height:auto;
+                padding:15px;
+            }
+        }
+    }
+    
+}
