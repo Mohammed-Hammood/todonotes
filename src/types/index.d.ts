@@ -1,4 +1,4 @@
-type IconsNames = "house-solid" | "sort-down-solid" | "sort-up-solid" | "xmark-solid" | "search" | "plus-solid" | "pen-to-square-solid" | "trash-solid" | "magnifying-glass-solid";
+type IconsNames = "sun-solid"| "moon-solid"| "house-solid" | "sort-down-solid" | "sort-up-solid" | "xmark-solid" | "search" | "plus-solid" | "pen-to-square-solid" | "trash-solid" | "magnifying-glass-solid";
 
 
 type Status = "Waiting" | "Completed" | "In process";
@@ -23,4 +23,8 @@ type TodoContextProps = {
     setActiveTodo: (value: TodoNote) => void;
     order: "id" | "-id";
     setOrder: (value: "id" | "-id") => void;
+}
+type ThemeContextProps = {
+    theme: "dark" | "light";
+    themeToggle: ()=> void;
 }

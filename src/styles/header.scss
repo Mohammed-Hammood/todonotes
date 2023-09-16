@@ -1,44 +1,53 @@
-
-header {
-    position:fixed;
-    width:100%;
+header[class=navbar-header] {
+    position: fixed;
+    width: 100%;
     height: 3.4rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    top:0;
-    left:0;
+    top: 0;
+    left: 0;
 
     nav {
-        width:100%;
+        width: 100%;
         height: 100%;
         background-color: var(--main-color, #373737);
         justify-content: space-between;
         display: flex;
         padding: 0 10px;
-        .left-buttons-container {
+
+        .navbar-group {
             display: flex;
-            color:white;
-            a {
+            color: white;
+            align-items: center;
+            gap: 5px;
+
+            a,
+            button {
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 padding: 0 10px;
-            }
-            .icon-container {
                 height: 100%;
-                padding: 0px;
-                display: inline-block;
-                width: 50px;
-                cursor: pointer;
+
+                &:hover {
+                    box-shadow: 0 0 3px var(--base-white, #fff);
+                }
+
+                &#light-mode-btn,
+                &#dark-mode-btn {
+                    width: 60px;
+                    justify-content: flex-start;
+                    border: 1px solid var(--border-color, #bababa);
+                    border-radius: 15px;
+                    height: 23px;
+                }
+
+                &#dark-mode-btn {
+                    justify-content: flex-end;
+                }
             }
         }
-       
-        .navbar-buttons {
-            height: 100%;
-            padding: 17px;
-            cursor: pointer;
-            border: none;
-        }
+
     }
 }

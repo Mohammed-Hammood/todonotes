@@ -10,7 +10,7 @@
     padding:0;
     margin:0;
     color:inherit;
-    transition: all 0.2s linear;
+    transition: color 0.2s linear, background 0.2s linear, opacity 0.2s linear;
 }
 
 main {
@@ -20,6 +20,9 @@ main {
 }
 html, body {
     min-height: 100vmin;
+    background: var(--bg-color);
+    color: var(--font-color);
+    font-family: 'times new roman', 'Courier New', Courier, monospace;
 }
  
 

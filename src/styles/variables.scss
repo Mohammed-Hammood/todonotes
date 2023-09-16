@@ -3,4 +3,11 @@ html {
     --base-white: #ffff;
     --base-black: #000;
     --border-color: #bababa;
+    --bg-color: #fff;
+    --font-color: #000;
+}
+
+[data-theme="dark"] {
+    --bg-color: #4d4d4d;
+    --font-color: #fff;
 }

@@ -8,7 +8,7 @@ export const TodoContext = createContext<TodoContextProps>({
     activeTodo: null,
     setActiveTodo: () => { },
     order: "id",
-    setOrder:()=> {}
+    setOrder: () => { }
 });
 
 export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
@@ -16,10 +16,10 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
     const [activeTodo, setActiveTodo] = useState<TodoNote | null>(todos.length > 0 ? todos[todos.length - 1] : null);
     const [order, setOrder] = useState<"id" | "-id">("-id");
 
-    const sortedTodos = todos.sort((a, b) => order === 'id' ? a.id - b.id: b.id  - a.id);
+    const sortedTodos = todos.sort((a, b) => order === 'id' ? a.id - b.id : b.id - a.id);
 
     const value = {
-        todos:sortedTodos ,
+        todos: sortedTodos,
         order,
         setOrder,
         setTodos,

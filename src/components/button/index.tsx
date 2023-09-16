@@ -13,6 +13,7 @@ interface Props {
     type?: "submit" | "button";
     width?: "fit-content" | "fill";
     className?:string;
+    id?:string;
 }
 
 export const Button: React.FC<Props> = ({ children,className, bg, width, shape,radius,  onClick, ...rest }): JSX.Element => {

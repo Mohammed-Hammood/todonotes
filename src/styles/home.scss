@@ -1,96 +1,108 @@
-
-
 .main-content-container {
-    display:flex;
+    display: flex;
     justify-content: center;
-    
-    .content-container{     
-        display: flex;   
+
+    .content-container {
+        display: flex;
         justify-content: space-between;
         flex-direction: column;
-        width:100%;
-        flex-wrap:wrap;
-        margin-top:50px;
+        width: 100%;
+        flex-wrap: wrap;
+        margin-top: 50px;
         height: calc(100% - 50px);
-        position:fixed;
-        bottom:0;
-        .left-container {
-            width:30%; 
-            top:50px;
-            flex:1 1 29%;
-            border:none;
-            height: 100%; //calc(100% - 50px);
-            overflow-y:auto;
-            overflow-x:hidden;
-            .todolist{
-                width:100%;
-                height:auto;
-                padding:10px;
-                cursor:pointer;
-                display:block;
-                border:none;
-                overflow:hidden;
-                text-overflow:ellipsis;
-                white-space:nowrap;
-                background-color: #fff;
+        position: fixed;
+        bottom: 0;
+        left:0;
+
+        .todoslist {
+            width: 30%;
+            top: 50px;
+            flex: 1 1 29%;
+            border: none;
+            height: 100%;
+            overflow-y: auto;
+            overflow-x: hidden;
+
+            .todo,
+            .active {
+                width: 100%;
+                height: auto;
+                padding: 10px;
+                cursor: pointer;
+                display: block;
+                border: none;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
                 border: 1px solid #eee;
                 text-align: left;
-            } 
-            .Waiting,  .Waiting-hover:hover { 
-                background-color:#c3c3c3;
-            }
-            .In-process, .In-process-hover:hover {
-                background-color: #87c1ff;
-            }
-            .Completed, .Completed-hover:hover  {
-                background-color:#20be20;
+                color: var(--font-color, black);
+
+                &.active,
+                &:hover {
+                    background: var(--main-color);
+                    color: var(--base-white, #fff);
+                }
+                &:active {
+                    transform: scale(1.01);
+                }
             }
         }
+
         .center-container {
             width: 5px;
             height: calc(100% - 50px);
             cursor: col-resize;
             background: #aaa;
-            position:fixed;
-            left:30%;
-            z-index:10;
+            position: fixed;
+            left: 30%;
+            z-index: 10;
         }
+
         .right-container {
-            top:50px;
-            width:calc(70% - 6px);
+            top: 50px;
+            width: calc(70% - 6px);
             display: block;
-            right:0;
-            border:none;
-            height:calc(100% - 50px);
+            right: 0;
+            border: none;
+            height: calc(100% - 50px);
             word-wrap: break-word;
             position: fixed;
-            overflow-y:auto;
-            overflow-x:hidden;
-            bottom:0;
-            z-index:1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            bottom: 0;
+            z-index: 1;
+
             .header-container {
                 width: 100%;
-                height: auto;
-                background-color: silver;
                 padding: 14px;
-                font-size: 12px;
-                cursor: default;
+                font-size: 1.2rem;
+                user-select: none;
+                line-height: 1.5;
             }
-            .waiting {
-                background-color:#c3c3c3;
+
+            .Waiting {
+                background-color: #c3c3c3;
+                color: var(--base-black, #000);
             }
-            .in-process {
-                background-color: #87c1ff;
+
+            .In-process, .process {
+                background-color: #339499;
+                color:var(--base-white, #fff);
             }
-            .completed {
-                background-color:#20be20;
+
+            .Completed {
+                background-color: #016f1d;
+                color: var(--base-white, #fff);
             }
+
             .description-container {
                 width: 100%;
-                height:auto;
-                padding:15px;
+                height: auto;
+                padding: 15px;
+
             }
         }
     }
-    
+
 }

@@ -1,22 +1,22 @@
 import { Modal, ICON, Button } from "components";
-import { TodoContext } from "context";
+import { ThemeContext, TodoContext } from "context";
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 
 
-export const Header = ():JSX.Element => {
-    const { todos, activeTodo, order, setOrder } = useContext(TodoContext);
+export const Header = (): JSX.Element => {
+    const { theme, themeToggle } = useContext(ThemeContext);
+    const { activeTodo, order, setOrder } = useContext(TodoContext);
     const [deleteTodo, setDeleteTodo] = useState<null | TodoNote>(null);
     const [editTodo, setEditTodo] = useState<null | TodoNote>(null);
     const [searchModal, setSearchModal] = useState<boolean>(false);
     const [addModal, setAddModal] = useState<boolean>(false);
 
-
     return (
         <>
-            <header>
+            <header className="navbar-header">
                 <nav className='navbar-container'>
-                    <div className='left-buttons-container'>
+                    <div className='navbar-group'>
                         <Link to={"/"}>
                             <ICON name='house-solid' color='white' />
                         </Link>
@@ -43,7 +43,18 @@ export const Header = ():JSX.Element => {
                             </Button>
                         </>}
                     </div>
-                    {todos.length > 0 && <>
+                    <div className="navbar-group">
+                        <Button
+                            shape={"transparent"}
+                            onClick={themeToggle}
+                            title={theme === 'dark' ? "Light mode": "Dark model"}
+                            id={theme === 'dark' ? "light-mode-btn": "dark-mode-btn"}
+                        >
+                            <ICON
+                                name={theme === "dark" ? 'sun-solid' : 'moon-solid'}
+                                color={theme === 'dark' ? 'yellow' : 'white'}
+                            />
+                        </Button>
                         <Button
                             shape={"transparent"}
                             title="Search"
@@ -51,7 +62,8 @@ export const Header = ():JSX.Element => {
                         >
                             <ICON name='search' color='white' />
                         </Button>
-                    </>}
+                    </div>
+
                 </nav>
             </header>
             {<Modal
